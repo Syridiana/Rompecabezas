@@ -46,25 +46,22 @@ function chequearSiGano(grilla) {
   if (arr == '123456789') {
     return true;
   } else {
-     return false; 
+     return false;
+
   }
   }
-
-
-chequearSiGano(grilla);
-  
 
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador(grilla) {
   var gane = chequearSiGano(grilla);
   if (gane) {
-    alert('¡Ganaste!');
+    alert('¡Ganaste!\nTe llevó ' + movimientos.length + ' movimientos.' );
   }
 
 }
 
-mostrarCartelGanador(grilla);
+
 
 /* Función que intercambia dos posiciones en la grilla.
 Pensar como intercambiar dos posiciones en un arreglo de arreglos. 
@@ -137,7 +134,8 @@ function moverEnDireccion(direccion) {
     if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
-        movimientos.push(direccion);
+        //guardarUltimoMovimiento(direccion);
+
     }
 }
 
@@ -212,6 +210,7 @@ function actualizarUltimoMovimiento(direccion) {
       ultimoMov.textContent = '←';
       break;
   }
+
 }
 
 /* Esta función permite agregar una instrucción a la lista
@@ -243,6 +242,7 @@ function mezclarPiezas(veces) {
   setTimeout(function() {
       mezclarPiezas(veces - 1);
     }, 100);
+
 }
 
 /* capturarTeclas: Esta función captura las teclas presionadas por el usuario. Javascript
@@ -259,15 +259,17 @@ function capturarTeclas() {
 
       moverEnDireccion(evento.which);
 
-        var gano = chequearSiGano();
+        var gano = chequearSiGano(grilla);
         if (gano) {
           setTimeout(function() {
-              mostrarCartelGanador();
+              mostrarCartelGanador(grilla);
               }, 500);
             }
             evento.preventDefault();
         }
     })
+
+
 }
 
 /* Se inicia el rompecabezas mezclando las piezas 60 veces 
