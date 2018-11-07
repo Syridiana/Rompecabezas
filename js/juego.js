@@ -1,5 +1,5 @@
 // Arreglo que contiene las instrucciones del juego 
-var instrucciones = ['acomoda', 'las', 'piecitas','fin'];
+var instrucciones = ['Ordená la imagen de BMO', 'Usá las flechas del teclado', 'Utilizá la imagen de abajo como referencia','¿En cuántos movimientos podés hacerlo?'];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -134,7 +134,7 @@ function moverEnDireccion(direccion) {
     if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
-        //guardarUltimoMovimiento(direccion);
+        guardarUltimoMovimiento(direccion);
 
     }
 }
@@ -242,7 +242,7 @@ function mezclarPiezas(veces) {
   setTimeout(function() {
       mezclarPiezas(veces - 1);
     }, 100);
-
+  movimientos.pop();
 }
 
 /* capturarTeclas: Esta función captura las teclas presionadas por el usuario. Javascript
@@ -279,7 +279,18 @@ function iniciar() {
     mostrarInstrucciones(instrucciones);
     mezclarPiezas(30);
     capturarTeclas();
+    movimientos=[];
+
 }
+
 
 // Ejecutamos la función iniciar
 iniciar();
+
+function reIniciar() {
+    mezclarPiezas(30);
+    capturarTeclas();
+    movimientos=[];
+
+}
+
